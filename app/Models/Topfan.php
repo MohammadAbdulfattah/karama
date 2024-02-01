@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Topfan extends Model
 {
     use HasFactory;
+
+    public function association(): object
+    {
+        return $this->belongsTo(Association::class);
+    }
 }
