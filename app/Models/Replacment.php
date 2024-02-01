@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Replacment extends Model
 {
     use HasFactory;
+
+    public function game(): object
+    {
+        return $this->belongsTo(Game::class);
+    }
+    public function inPlayer(): object
+    {
+        return $this->belongsTo(Game::class,'inPlayer_id');
+    }
+    public function outPlayer(): object
+    {
+        return $this->belongsTo(Game::class,'outPlayer_id');
+    }
 }
