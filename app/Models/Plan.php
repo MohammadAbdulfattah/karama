@@ -17,4 +17,10 @@ class Plan extends Model
     {
         return $this->belongsTo(Game::class);
     }
+    protected $fillable = [
+        'uuid',
+        'player_id',
+        'game_id',
+        'status'
+    ];
 }

@@ -23,4 +23,17 @@ class Player extends Model
         return $this->hasMany(Replacment::class);
     }
 
+    protected $fillable = [
+        'uuid',
+        'name',
+        'height',
+        'position',
+        'number',
+        'born',
+        'from',
+        'first_club',
+        'career',
+        'image',
+        'sport_id'
+    ];
 }

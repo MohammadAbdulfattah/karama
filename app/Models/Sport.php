@@ -33,4 +33,10 @@ class Sport extends Model
     {
         return $this->morphMany(Information::class, 'information_able');
     }
+
+    protected $fillable = [
+        'uuid',
+        'name',
+        'image'
+    ];
 }

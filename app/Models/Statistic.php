@@ -13,4 +13,11 @@ class Statistic extends Model
     {
         return $this->belongsTo(Game::class);
     }
+
+    protected $fillable = [
+        'uuid',
+        'name',
+        'value',
+        'game_id'
+    ];
 }

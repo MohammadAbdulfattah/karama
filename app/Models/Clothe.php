@@ -13,5 +13,10 @@ class Clothe extends Model
     {
         return $this->belongsTo(Season::class);
     }
-
+    protected $fillable = [
+        'uuid',
+        'image',
+        'season_id',
+        'sport_id'
+    ];
 }

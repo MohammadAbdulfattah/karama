@@ -17,4 +17,21 @@ class Standing extends Model
     {
         return $this->belongsTo(Season::class);
     }
+
+    protected $fillable = [
+        'uuid',
+        'win',
+        'lose',
+        'draw',
+        '+/-',
+        'points',
+        'play',
+        'season_id',
+        'club_id'
+    ];
+
+    public function toArray()
+    {
+        return [''];
+    }
 }

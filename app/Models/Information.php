@@ -13,4 +13,15 @@ class Information extends Model
     {
         return $this->morphTo();
     }
+
+    protected $fillable = [
+        'uuid',
+        'title',
+        'content',
+        'image',
+        'views',
+        'type',
+        'information_able_type',
+        'information_able_id'
+    ];
 }

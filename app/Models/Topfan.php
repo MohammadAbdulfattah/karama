@@ -13,4 +13,10 @@ class Topfan extends Model
     {
         return $this->belongsTo(Association::class);
     }
+
+    protected $fillable = [
+        'uuid',
+        'name',
+        'association_id'
+    ];
 }

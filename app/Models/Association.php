@@ -13,12 +13,23 @@ class Association extends Model
     {
         return $this->belongsTo(Sport::class);
     }
+
     public function videos()
     {
         return $this->morphMany(Information::class, 'video_able');
     }
+
     public function topfan()
     {
         return $this->hasOne(Topfan::class);
     }
+
+    protected $fillable = [
+        'uuid',
+        'boss',
+        'image',
+        'descreption',
+        'country',
+        'sport_id'
+    ];
 }

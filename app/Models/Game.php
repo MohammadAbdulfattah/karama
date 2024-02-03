@@ -41,4 +41,17 @@ class Game extends Model
     {
         return $this->morphMany(Information::class,'video_able');
     }
+
+    protected $fillable = [
+        'uuid',
+        'when',
+        'status',
+        'plan',
+        'channel',
+        'round',
+        'play_ground',
+        'season_id',
+        'club1_id',
+        'club2_id'
+    ];
 }

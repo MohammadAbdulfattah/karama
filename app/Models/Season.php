@@ -29,4 +29,11 @@ class Season extends Model
     {
         return $this->hasMany(Game::class);
     }
+
+    protected $fillable = [
+        'uuid',
+        'name',
+        'start_date',
+        'end_date'
+    ];
 }
