@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Boss extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'uuid',
+        'name',
+        'start_year',
+        'image'
+    ];
 }

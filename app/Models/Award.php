@@ -9,14 +9,22 @@ class Award extends Model
 {
     use HasFactory;
 
-    public function season():object
+    public function season(): object
     {
         return $this->belongsTo(Season::class);
-
     }
-    public function sport():object
+    public function sport(): object
     {
         return $this->belongsTo(Sport::class);
-
     }
+
+    protected $fillable = [
+        'uuid',
+        'name',
+        'description',
+        'image',
+        'type',
+        'season_id',
+        'sport_id'
+    ];
 }

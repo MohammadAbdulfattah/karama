@@ -21,4 +21,11 @@ class Replacment extends Model
     {
         return $this->belongsTo(Game::class,'outPlayer_id');
     }
+
+    protected $fillable = [
+        'uuid',
+        'inPlayer_id',
+        'outPlayer_id',
+        'game_id'
+    ];
 }

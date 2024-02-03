@@ -23,6 +23,14 @@ class Club extends Model
     }
     public function videos()
     {
-        return $this->morphMany(Information::class,'video_able');
+        return $this->morphMany(Video::class,'video_able');
     }
+
+    protected $fillable = [
+        'uuid',
+        'name',
+        'address',
+        'logo',
+        'sport_id'
+    ];
 }
