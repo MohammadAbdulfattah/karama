@@ -19,11 +19,15 @@ class Club extends Model
     }
     public function informations()
     {
-        return $this->morphMany(Information::class,'information_able');
+        return $this->morphMany(Information::class, 'information_able');
     }
     public function videos()
     {
-        return $this->morphMany(Video::class,'video_able');
+        return $this->morphMany(Video::class, 'video_able');
+    }
+    public function Games():object
+    {
+        return $this->hasMany(Game::class);
     }
 
     protected $fillable = [

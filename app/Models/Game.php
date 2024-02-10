@@ -23,11 +23,11 @@ class Game extends Model
     }
     public function club1(): object
     {
-        return $this->belongsTo(Game::class, 'club1_id');
+        return $this->belongsTo(Club::class,'club1_id');
     }
     public function club2(): object
     {
-        return $this->belongsTo(Game::class, 'club2_id');
+        return $this->belongsTo(Club::class, 'club2_id');
     }
     public function season(): object
     {
@@ -35,11 +35,11 @@ class Game extends Model
     }
     public function informations()
     {
-        return $this->morphMany(Information::class,'information_able');
+        return $this->morphMany(Information::class, 'information_able');
     }
     public function videos()
     {
-        return $this->morphMany(Information::class,'video_able');
+        return $this->morphMany(Information::class, 'video_able');
     }
 
     protected $fillable = [

@@ -12,7 +12,7 @@ class Employee extends Model
     {
         return $this->belongsTo(sport::class);
     }
-
+    
     protected $fillable = [
         'uuid',
         'name',
