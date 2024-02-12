@@ -16,7 +16,7 @@ class GameResource extends JsonResource
     public function toArray($request)
     {
         return [
-
+            'uuid' => $this->uuid,
             'status' => $this->status,
             'firstClub' => $this->club1->name,
             'firstClubLogo' => $this->club1->logo,

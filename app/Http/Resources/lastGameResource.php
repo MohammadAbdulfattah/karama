@@ -16,6 +16,7 @@ class lastGameResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'uuid' => $this->uuid,
             'play_ground' => $this->play_ground,
             'date' => Carbon::parse($this->when)->format('m-d D H:i'),
             'status' => $this->status,

@@ -15,57 +15,6 @@ class liveGameResource extends JsonResource
      */
     public function toArray($request)
     {
-        $now = Carbon::now()->format('m-d D H:i');
-        $matchStart = Carbon::parse($this->when)->format('m-d D H:i');
-        return[
-        ];
-        /*
-        public function toArray($request){
-    $now = Car::now();
-    $matchStart = Carbonparse($this->when
-    $matchEnd = $matchStart->copy()->addMinutes(90);
-
-    $diffFirstHalf = $now->diffInMinutes($matchStart->addMinutes(45));
-    $diffSecondHalf = $now->diffInMinutes($matchStart->addMinutes(90));
-
-    if ($matchEnd->isPast()) {
-        // Match is finished
-        return [
-            'play_ground' => $this->play_ground,
-            'status' => $this->status,
-            'date' => $matchStart->format('m-d D H:i'),
-            'live_time' => 'Finished',
-            'result' => $this->result,
-        ];
-    }
-
-    if ($diffFirstHalf >= 0 && $diffFirstHalf < 45) {
-        // First half
-        return [
-            'play_ground' => $this->play_ground,
-            'status' => $this->status,
-            'date' => $matchStart->format('m-d D H:i'),
-            'live_time' => 'First Half',
-        ];
-    }
-
-    if ($diffSecondHalf >= 0 && $diffSecondHalf < 90) {
-        // Second half
-        return [
-            'play_ground' => $this->play_ground,
-            'status' => $this->status,
-            'date' => $matchStart->format('m-d D H:i'),
-            'live_time' => 'Second Half',
-        ];
-    }
-
-    // Match has not started yet
-    return [
-        'play_ground' => $this->play_ground,
-        'status' => $this->status,
-        'date' => $matchStart->format('m-d D H:i'),
-        'live_time' => 'Not Started',
-    ];
-}*/
+        return [];
     }
 }

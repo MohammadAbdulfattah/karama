@@ -13,6 +13,11 @@ class Clothe extends Model
     {
         return $this->belongsTo(Season::class);
     }
+    public function sport(): object
+    {
+        return $this->belongsTo(Sport::class);
+    }
+
     protected $fillable = [
         'uuid',
         'image',

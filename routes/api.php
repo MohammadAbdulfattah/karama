@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\ClothController;
 use App\Http\Controllers\Api\GameController;
+use App\Http\Controllers\Api\SeasonController;
 use App\Http\Controllers\Api\StandingController;
 use App\Http\Controllers\Api\StatisticController;
 use Illuminate\Http\Request;
@@ -30,4 +32,6 @@ Route::get('/nextMatch', [GameController::class, 'nextMatch']);
 Route::get('/lastMatch', [GameController::class, 'lastMatchDetails']);
 Route::get('/liveMatch', [GameController::class, 'liveMatch']);
 Route::get('/getMatchByDate/{date}', [GameController::class, 'getMatchByDate']);
+Route::get('/clothes/{sport}', [ClothController::class, 'currentSeasonClothes']);
+Route::get('/season', [SeasonController::class, 'currentSeasonDetails']);
 // Route::get('/nextThreeMatches', [GameController::class, 'nextThreeMatches']);
