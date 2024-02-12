@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ClothController;
 use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\SeasonController;
+use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\StandingController;
 use App\Http\Controllers\Api\StatisticController;
 use Illuminate\Http\Request;
@@ -35,3 +36,9 @@ Route::get('/getMatchByDate/{date}', [GameController::class, 'getMatchByDate']);
 Route::get('/clothes/{sport}', [ClothController::class, 'currentSeasonClothes']);
 Route::get('/season', [SeasonController::class, 'currentSeasonDetails']);
 // Route::get('/nextThreeMatches', [GameController::class, 'nextThreeMatches']);
+
+
+Route::get('/players/{sport_id}', [PlayerController::class, 'index'])->name('allPlayers');
+
+Route::get('/awards/{sport_id}', [PlayerController::class, 'index'])->name('allawards');
+Route::get('/awards/{type}', [PlayerController::class, 'index'])->name('awardsType');

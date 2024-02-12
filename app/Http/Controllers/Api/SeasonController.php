@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Traits\GeneralTrait;
+use App\Models\Season;
+use App\Http\Resources\SeasonResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SeasonsResource;
 use App\Models\Season;
@@ -22,5 +25,4 @@ class SeasonController extends Controller
         } catch (\Throwable $th) {
             return $this->errorResponse("not Found", 404);
         }
-    }
 }
