@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\GameController;
+use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\StandingController;
 use App\Http\Controllers\Api\StatisticController;
 use Illuminate\Http\Request;
@@ -31,3 +32,9 @@ Route::get('/lastMatch', [GameController::class, 'lastMatchDetails']);
 Route::get('/liveMatch', [GameController::class, 'liveMatch']);
 Route::get('/getMatchByDate/{date}', [GameController::class, 'getMatchByDate']);
 // Route::get('/nextThreeMatches', [GameController::class, 'nextThreeMatches']);
+
+
+Route::get('/players/{sport_id}', [PlayerController::class, 'index'])->name('allPlayers');
+
+Route::get('/awards/{sport_id}', [PlayerController::class, 'index'])->name('allawards');
+Route::get('/awards/{type}', [PlayerController::class, 'index'])->name('awardsType');
