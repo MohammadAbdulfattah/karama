@@ -7,9 +7,7 @@ use App\Models\Season;
 use App\Http\Resources\SeasonResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SeasonsResource;
-use App\Models\Season;
 use Illuminate\Http\Request;
-use App\Http\Traits\GeneralTrait;
 use Carbon\Carbon;
 
 class SeasonController extends Controller
@@ -25,4 +23,6 @@ class SeasonController extends Controller
         } catch (\Throwable $th) {
             return $this->errorResponse("not Found", 404);
         }
+    }
 }
+    
