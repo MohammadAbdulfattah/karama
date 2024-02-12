@@ -16,6 +16,7 @@ class NextGameResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'uuid' => $this->uuid,
             'title' => 'Next Match',
             'firstClub' => $this->club1->name,
             'firstClubLogo' => $this->club1->logo,
@@ -25,7 +26,6 @@ class NextGameResource extends JsonResource
             'channel' => $this->channel,
             'date' => Carbon::parse($this->when)->format('Y-m-d D'),
             'hour' => Carbon::parse($this->when)->format('H:i A'),
-            // 'hour' => $this->
         ];
         // return parent::toArray($request);
     }

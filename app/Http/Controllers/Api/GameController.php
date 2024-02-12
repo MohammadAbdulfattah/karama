@@ -13,6 +13,7 @@ use App\Http\Resources\ScoreResource;
 use App\Http\Resources\StatisticResource;
 use App\Models\Club;
 use App\Models\Game;
+use App\Models\Player;
 use App\Models\Statistic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,7 +39,9 @@ class GameController extends Controller
         try {
             $currentDate = Carbon::now()->format('Y-m-d-h-i');
             $nextMatch = Game::where('when', '>=', $currentDate)->where('status', 'not_started')->limit(1)->get();
-            $data = NextGameResource::collection($nextMatch);
+            $data['details'] = NextGameResource::collection($nextMatch);
+            $player = Player::inRandomOrder()->first();
+            $data['player_image'] = $player->image;
             return $this->apiResponse($data);
         } catch (\Throwable $th) {
             return $this->errorResponse("Not Found", 404);
@@ -55,10 +58,10 @@ class GameController extends Controller
         }
     }
 
-    public function goalScorers($match_id)
+    public function goalScorers($match_uuid)
     {
         try {
-            $match = Game::findOrFail($match_id);
+            $match = Game::where('uuid',$match_uuid);
             $scorers = Statistic::where('game_id', $match->id)->where('name', 'goalScorers')->get();
             $data = StatisticResource::collection($scorers);
             return $data;
@@ -67,10 +70,10 @@ class GameController extends Controller
             return $this->errorResponse("Not Found", 404);
         }
     }
-    public function getMatchScore($match_id)
+    public function getMatchScore($match_uuid)
     {
         try {
-            $match = Game::findOrFail($match_id);
+            $match = Game::Where('uuid',$match_uuid)->first();
             $score = Statistic::where('game_id', $match->id)->where('name', 'score')->get();
             $data['score'] = ScoreResource::collection($score);
             $game = Game::findOrFail($match->id);
@@ -95,7 +98,7 @@ class GameController extends Controller
     }
     public function getMatchByDate($date) //the date format must be "Y-m-d"
     {
-        
+
         try {
             $matches = Game::all();
             foreach ($matches as $match) {

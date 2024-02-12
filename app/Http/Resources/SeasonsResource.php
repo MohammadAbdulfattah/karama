@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StandingResource extends JsonResource
+class SeasonsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,9 @@ class StandingResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'club' => $this->club->name,
-            'play' => $this->play,
-            'win' => $this->win,
-            'draw' => $this->draw,
-            'lose' => $this->lose,
-            'points' => $this->win * 3 + $this->draw,
-            '+/-' => $this->plus_minus
+            'season name' => $this->name,
+            'season start' => $this->start_date,
+            'season end' => $this->end_date,
         ];
         // return parent::toArray($request);
     }

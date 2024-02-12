@@ -16,6 +16,7 @@ class MatchByDateResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'uuid' => $this->uuid,
             'date' => Carbon::parse($this->when)->format('Y-m-d D'),
             'hour' => Carbon::parse($this->when)->format('H:i A'),
             'play ground' => $this->play_ground,

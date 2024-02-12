@@ -25,12 +25,13 @@ class StatisticController extends Controller
         }
     }
 
-    public function lastMatchStats(Request $request, $match_id)
+    public function lastMatchStats(Request $request, $match_uuid)
     {
         try {
-            $statistics = Statistic::where('game_id', $match_id)->get();
+            $match = Game::where('uuid', $match_uuid)->first();
+            $statistics = Statistic::where('game_id', $match->id)->get();
             $data['statistics'] = StatisticResource::collection($statistics);
-            $game = Game::findOrFail($match_id);
+            $game = Game::findOrFail($match->id);
             $data['firstClub'] = $this->getClub($game->club1_id);
             $data['secondeClub'] = $this->getClub($game->club2_id);
             return $this->apiResponse($data);
@@ -39,12 +40,13 @@ class StatisticController extends Controller
         }
     }
 
-    public function matchScore(Request $request, $match_id)
+    public function matchScore(Request $request, $match_uuid)
     {
         try {
-            $score = Statistic::where('game_id', $match_id)->where('name', 'score')->get();
+            $match = Game::where('uuid', $match_uuid)->first();
+            $score = Statistic::where('game_id', $match->id)->where('name', 'score')->get();
             $data['score'] = ScoreResource::collection($score);
-            $game = Game::findOrFail($match_id);
+            $game = Game::findOrFail($match->id);
             $data['firstClub'] = $this->getClub($game->club1_id);
             $data['secondeClub'] = $this->getClub($game->club2_id);
             return $this->apiResponse($data);
