@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Traits\GeneralTrait;
-use App\Models\Season;
 use App\Http\Resources\SeasonResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SeasonsResource;
@@ -18,10 +16,10 @@ class SeasonController extends Controller
         try {
             $currentYear = Carbon::now()->format('Y-m-d');
             $seasons = Season::where('start_date', '<=', $currentYear)->where('end_date', '>=', $currentYear)->get();
-            $data = SeasonsResource::collection($seasons);
+            $data['season'] = SeasonsResource::collection($seasons);
             return $this->apiResponse($data);
         } catch (\Throwable $th) {
-            return $this->errorResponse("not Found", 404);
+            return $this->errorResponse("".$th->getMessage(), 404);
         }
     }
 }

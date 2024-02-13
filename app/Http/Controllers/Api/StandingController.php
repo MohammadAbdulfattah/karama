@@ -14,12 +14,16 @@ class StandingController extends Controller
     use GeneralTrait;
     public function allClubsStanding(Request $request, $season_uuid)
     {
-        $season = Season::where('uuid', $season_uuid)->first();
-        $standing = Standing::where('season_id', $season->id)->orderBy('points','desc')->get();
-        if (!$standing) {
-            return $this->requiredField("the standing for this season is not available");
+        try {
+            $season = Season::where('uuid', $season_uuid)->first();
+            $standing = Standing::where('season_id', $season->id)->orderBy('points', 'desc')->get();
+            if (!$standing) {
+                return $this->requiredField("the standing for this season is not available");
+            }
+            $data['standings'] = StandingResource::collection($standing);
+            return $this->apiResponse($data);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('the standing for this season is not available : '.$th->getMessage(), 404);
         }
-        $data = StandingResource::collection($standing);
-        return $this->apiResponse($data);
     }
 }

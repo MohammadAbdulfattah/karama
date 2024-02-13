@@ -39,12 +39,12 @@ class GameController extends Controller
         try {
             $currentDate = Carbon::now()->format('Y-m-d-h-i');
             $nextMatch = Game::where('when', '>=', $currentDate)->where('status', 'not_started')->limit(1)->get();
-            $data['details'] = NextGameResource::collection($nextMatch);
+            $data['match details'] = NextGameResource::collection($nextMatch);
             $player = Player::inRandomOrder()->first();
             $data['player_image'] = $player->image;
             return $this->apiResponse($data);
         } catch (\Throwable $th) {
-            return $this->errorResponse("Not Found", 404);
+            return $this->errorResponse('the match in unavailable : '.$th->getMessage(), 404);
         }
     }
 
@@ -54,20 +54,19 @@ class GameController extends Controller
             $club = Club::findOrFail($id);
             return ClubResource::make($club);
         } catch (\Exception $e) {
-            return $this->errorResponse("club not found", 404);
+            return $this->errorResponse('the match in unavailable : '.$e->getMessage(), 404);
         }
     }
 
-    public function goalScorers($match_uuid)
+    public function goalScorers($match_id)
     {
         try {
-            $match = Game::where('uuid',$match_uuid);
-            $scorers = Statistic::where('game_id', $match->id)->where('name', 'goalScorers')->get();
+            $scorers = Statistic::where('game_id', $match_id)->where('name', 'goalScorers')->get();
             $data = StatisticResource::collection($scorers);
             return $data;
         } catch (\Throwable $th) {
             //throw $th;
-            return $this->errorResponse("Not Found", 404);
+            return $this->errorResponse('the match in unavailable : '.$th->getMessage(), 404);
         }
     }
     public function getMatchScore($match_uuid)
@@ -81,7 +80,7 @@ class GameController extends Controller
             $data['secondeClub'] = $this->getClub($game->club2_id);
             return $data;
         } catch (\Exception $e) {
-            return $this->errorResponse("match not found", 404);
+            return $this->errorResponse('the match in unavailable : '.$e->getMessage(), 404);
         }
     }
     public function lastMatchDetails()
@@ -89,11 +88,11 @@ class GameController extends Controller
         try {
             $currentDate = Carbon::now()->format('Y-m-d-h-i');
             $lastMatch = Game::whereIn('status', ['live', 'finished'])->where('when', '<=', $currentDate)->orderBy('when', 'desc')->first();
-            $data['lastMatch'] = lastGameResource::make($lastMatch);
+            $data['last Match'] = lastGameResource::make($lastMatch);
             $data['score'] = $this->getMatchScore($lastMatch->id);
             return $this->apiResponse($data);
         } catch (\Throwable $th) {
-            return $this->errorResponse('Not Found', 404);
+            return $this->errorResponse('the match in unavailable : '.$th->getMessage(), 404);
         }
     }
     public function getMatchByDate($date) //the date format must be "Y-m-d"
@@ -110,7 +109,7 @@ class GameController extends Controller
                 }
             }
         } catch (\Throwable $th) {
-            return $this->errorResponse('Not Found', 404);
+            return $this->errorResponse('the match in unavailable : '.$th->getMessage(), 404);
         }
     }
 
