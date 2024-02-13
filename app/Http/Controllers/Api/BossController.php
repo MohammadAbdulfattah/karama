@@ -26,8 +26,8 @@ class BossController extends Controller
     {
         try {
             $boss = Boss::orderBy('start_year', 'Desc')->first();
-            $data['Boss'] = BossesResource::collection($boss);
-            return $this->apiResponse($data);
+            // $data['Boss'] = BossesResource::collection($boss);
+            return $this->apiResponse($boss);
         } catch (\Throwable $th) {
             return $this->errorResponse("Error in getting boss data " . $th->getMessage(), 500);
         }
