@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Resources\clothesResource;
 use App\Models\Clothe;
 use App\Models\Season;
 use App\Models\Sport;
-use Illuminate\Http\Request;
 use App\Http\Traits\GeneralTrait;
-
-class ClothController extends Controller
+class ClotheController extends Controller
 {
     use GeneralTrait;
     public function currentSeasonClothes($sport_uuid)
@@ -22,7 +21,8 @@ class ClothController extends Controller
             $data['clothes'] = clothesResource::collection($clothes);
             return $this->apiResponse($data);
         } catch (\Throwable $th) {
-            return $this->errorResponse("Not Found", 404);
+            return $this->errorResponse('the clothes image is not available : '.$th->getMessage(), 404);
+
         }
     }
     /**
@@ -31,16 +31,6 @@ class ClothController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -68,17 +58,6 @@ class ClothController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -101,3 +80,4 @@ class ClothController extends Controller
         //
     }
 }
+

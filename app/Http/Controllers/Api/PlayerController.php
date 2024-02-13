@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\playerResource;
+use App\Http\Resources\playersResource;
 use App\Http\Traits\GeneralTrait;
 use App\Models\Player;
+use App\Models\Sport;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -15,19 +17,62 @@ class PlayerController extends Controller
     public function allPlayers()
     {
     }
-    public function index(Request $request, $sport_id)
+    public function index(Request $request, $sport_uuid)
     {
         try {
-            $players = Player::where('sport_id', $sport_id)->orderBy('name', 'desc')->get();
+            $sport = Sport::where('uuid', $sport_uuid)->first();
+            $players = Player::where('sport_id', $sport->id)->orderBy('name', 'desc')->get();
 
             if ($players->isEmpty()) {
                 return $this->requiredField("the players in this sport are not available");
             }
 
-            $data = PlayerResource::collection($players);
+            $data['players'] = PlayerResource::collection($players);
             return $this->apiResponse($data);
         } catch (\Throwable $th) {
             return $this->apiErrorResponse("An error occurred while fetching players: " . $th->getMessage());
+        }
+    }
+
+    public function strikers()
+    {
+        try {
+            $strikers = Player::whereIn('position', ['ST', 'SS', 'RW', 'RWF', 'LW', 'LWF', 'CF'])->get();
+            $data['strikers'] = playersResource::collection($strikers);
+            return $this->apiResponse($data);
+        } catch (\Throwable $th) {
+            return $this->apiErrorResponse('an error occurred while fetching players: ' . $th->getMessage());
+        }
+    }
+
+    public function midfielders()
+    {
+        try {
+            $Midfielders = Player::where('position', 'like', '%M')->get();
+            $data['Midfielders'] = playersResource::collection($Midfielders);
+            return $this->apiResponse($data);
+        } catch (\Throwable $th) {
+            return $this->apiErrorResponse('an error occurred while fetching players: ' . $th->getMessage());
+        }
+    }
+    public function defenders()
+    {
+        try {
+            $defenders = Player::where('position', 'like', '%B')->get();
+            $data['defenders'] = playersResource::collection($defenders);
+            return $this->apiResponse($data);
+        } catch (\Throwable $th) {
+            return $this->apiErrorResponse('an error occurred while fetching players: ' . $th->getMessage());
+        }
+    }
+    public function goalKeepers()
+    {
+        try {
+            $goalKeepers = Player::where('position', 'GK')->get();
+            $data['goalKeepers'] = playersResource::collection($goalKeepers);
+            return $this->apiResponse($data);
+        } catch (\Throwable $th) {
+            return $this->apiErrorResponse('an error occurred while fetching players: ' . $th->getMessage());
         }
     }
 
