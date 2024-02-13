@@ -19,6 +19,7 @@ class clothesResource extends JsonResource
             'clothes image' => $this->image,
             'sport' => $this->sport->name,
             'season' => $this->season->name
+            
         ];
         // return parent::toArray($request);
     }

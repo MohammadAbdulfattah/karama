@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AwardController;
 use App\Http\Controllers\Api\BossController;
 use App\Http\Controllers\Api\ClotheController;
 use App\Http\Controllers\Api\EmployeeController;
@@ -34,9 +35,9 @@ Route::get('/score/{match}', [StatisticController::class, 'matchScore']);
 //matches
 // Route::get('/liveMatch', [GameController::class, 'liveMatch']);
 Route::get('/last/match', [GameController::class, 'lastMatchDetails']);
-Route::get('/nextThreeMatches', [GameController::class, 'nextThreeMatches']);
-Route::get('/next/match', [GameController::class, 'nextMatch']);
-Route::get('/MatchByDate/{date}', [GameController::class, 'getMatchByDate']);
+Route::get('/next/matches', [GameController::class, 'nextThreeMatches']);
+Route::get('/main/next/matches', [GameController::class, 'nextMatch']);
+Route::get('/match/date/{date}', [GameController::class, 'getMatchByDate']);
 //season
 Route::get('/season', [SeasonController::class, 'currentSeasonDetails']);
 //clothes
@@ -45,12 +46,12 @@ Route::get('/clothes/{sport}', [ClotheController::class, 'currentSeasonClothes']
 Route::get('/bosses', [BossController::class, 'allBosses']);
 Route::get('/boss', [BossController::class, 'currentBoss']);
 //awards
-Route::get('/awards/{sport}', [PlayerController::class, 'index'])->name('allAwards');
-Route::get('/club/awards', [PlayerController::class, 'clubAwards'])->name('clubAwards');
-Route::get('/personal/awards', [PlayerController::class, 'personalAwards'])->name('personalAwards');
+Route::get('/awards/{sport}', [AwardController::class, 'index'])->name('allAwards');
+Route::get('/club/awards', [AwardController::class, 'clubAwards'])->name('clubAwards');
+Route::get('/personal/awards', [AwardController::class, 'personalAwards'])->name('personalAwards');
 //employees
-Route::get('/managers', [EmployeeController::class, 'allManagers']);
-Route::get('/coaches', [EmployeeController::class, 'allCoaches']);
+Route::get('/managers/{sport}', [EmployeeController::class, 'allManagers']);
+Route::get('/coaches/{sport}', [EmployeeController::class, 'allCoaches']);
 //players
 Route::get('/players/{sport}', [PlayerController::class, 'index'])->name('allPlayers');
 Route::get('/midfielders', [PlayerController::class, 'midfielders']);
